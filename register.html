@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap core CSS <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/mystyles.css" rel="stylesheet">
+  <script src="js/myscripts.js"></script>
+</head>
+
+<body>
+
+  <div class="login">
+    <h4>noteMeUp</h4>
+    <form action="register.php" name="registerForm" onsubmit="return validateRegister()" method="post">
+      <!--basic register form -->
+      <div class="form-group">
+        <label for="fname">First name:</label>
+        <input type="text" class="form-control" id="fname" name="fname">
+      </div>
+      <div class="form-group">
+        <label for="lname">Last name:</label>
+        <input type="text" class="form-control" id="lname" name="lname">
+      </div>
+      <div class="form-group">
+        <label for="usr">Username*:</label>
+        <input type="text" class="form-control" id="usr" name="usr">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Password*:</label>
+        <input type="password" class="form-control" id="pwd" name="pwd">
+      </div>
+      <a href="index.php" class="btn btn-primary">Back</a>
+      <!--<button type="button" class="btn btn-primary">Register</button> -->
+      <input type="submit" value="Register" class="btn btn-primary">
+      </button>
+    </form>
+    <hr> * indicates required field
+  </div>
+  </div>
+</body>
+
+</html>
