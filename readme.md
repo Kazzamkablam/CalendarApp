@@ -21,6 +21,6 @@ $username = "root";
 $password = "";
 $dbname = "localdb";
 
-## Design document
+## Design document & SQL tables
 
-You can find design document for this project under docs folder.
+You can find design document and SQL tables for this project under docs folder.
