@@ -13,10 +13,12 @@
 
  <?php
 session_start(); //basic user information
+//include 'session.php'; //get session variables
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "localdb";
+include 'get-connection.php'; //get database info from database, comment if you are using locally instead of azure.
 
 $loguser = $_POST["usr"];
 $logpwd = $_POST["pwd"];
@@ -44,7 +46,10 @@ if ($result->num_rows > 0) {
             $_SESSION["salasana"] = $logpwd;
             $_SESSION["ID"] = $row["Kayttaja_ID"];
             $_SESSION["etunimi"] = $row["etunimi"];
-            header('Location: /PHPSQL/main.php'); //redirect to main.php
+
+            include 'setsession.php'; //set session variables
+
+            header('Location: /main.php'); //redirect to main.php
         } else {
             echo "Login failed invalid username or password<br><br><a href='index.php' class='btn btn-primary btn-sm'>Back</a>"; //add some info and buttons in case of failure.
         }

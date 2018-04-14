@@ -2,6 +2,7 @@
 
 function toggleElement(elementti) { //hides or shows elements
 
+   // alert("Hello\nHow are you?"); 
 
 var div = document.getElementById(elementti);
     if (div.style.display !== 'none') {

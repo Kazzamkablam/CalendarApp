@@ -12,12 +12,8 @@
   <body>
 
  <?php
- session_start(); 
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "localdb";
+session_start();
+include 'session.php'; //get session variables
 $logdate = $_POST["date"];
 $logtime = $_POST["time"];
 $logdesc = $_POST["desc"];
@@ -36,29 +32,27 @@ if ($conn->connect_error) {
 
 $sql = "INSERT INTO aika (Aika_id, paiva, kellonaika, kuvaus)
 VALUES ('0', '$logdate', '$logtime', '$logdesc' )";
-
-if ($conn->query($sql) === TRUE) {
+//insert some data
+if ($conn->query($sql) === true) {
     //echo "New record created successfully<br><a href='main.php' class='btn btn-primary btn-sm'>Ok</a>";
-    $my_id = mysqli_insert_id($conn); 
+    $my_id = mysqli_insert_id($conn);
 
     $sql = "INSERT INTO aikataulu (aikataulu_id, Kayttaja_id, aika_id)
     VALUES ('0', '$mysession', '$my_id')";
-   // $_SESSION["ID"] = $row["Kayttaja_ID"];
-   if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully<br><a href='main.php' class='btn btn-primary btn-sm'>Ok</a>";
-   }
-   else
-   {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-    echo "<br><a href='main.php' class='btn btn-primary btn-sm'>Ok</a>";
-   }
+    // $_SESSION["ID"] = $row["Kayttaja_ID"];
+    if ($conn->query($sql) === true) { //give user some feedback
+        echo "New record created successfully<br><a href='main.php' class='btn btn-primary btn-sm'>Ok</a>";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error; //error happened!
+        echo "<br><a href='main.php' class='btn btn-primary btn-sm'>Ok</a>";
+    }
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
     echo "<br><a href='main.php' class='btn btn-primary btn-sm'>Ok</a>";
 }
 
 $conn->close();
-?> 
+?>
 
   </body>
 </html>

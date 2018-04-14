@@ -17,6 +17,8 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "localdb";
+include 'get-connection.php'; //get database info from database, comment if you are using locally instead of azure.
+
 $loguser = $_POST["usr"]; //get some basic data
 $logpwd = $_POST["pwd"];
 $logfname = $_POST["fname"];
@@ -43,8 +45,14 @@ if ($conn->query($sql) === true) { //give some info to user.
     echo "Account created successfully, you may now log in.";
     echo "<br><br><a href='index.php' class='btn btn-primary btn-sm'>Back</a>";
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error; //error happened
-    echo "<br><br><a href='register.html' class='btn btn-primary btn-sm'>Back</a>";
+    if ($conn->errno == 1062) { //duplicate entry
+        echo "Username already exists";
+        echo "<br><br><a href='register.html' class='btn btn-primary btn-sm'>Back</a>";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error; //error happened
+
+        echo "<br><br><a href='register.html' class='btn btn-primary btn-sm'>Back</a>";
+    }
 }
 
 $conn->close();
