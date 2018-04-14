@@ -14,7 +14,7 @@
  <?php
 session_start(); //basic user information
 //include 'session.php'; //get session variables
-$servername = "localhost";
+$servername = "localhost"; //database values
 $username = "root";
 $password = "";
 $dbname = "localdb";

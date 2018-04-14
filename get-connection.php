@@ -4,7 +4,7 @@ $connectstr_dbname = '';
 $connectstr_dbusername = '';
 $connectstr_dbpassword = '';
 
-foreach ($_SERVER as $key => $value) {
+foreach ($_SERVER as $key => $value) {  //get string values
     if (strpos($key, "MYSQLCONNSTR_localdb") !== 0) {
         continue;
     }
@@ -14,12 +14,7 @@ foreach ($_SERVER as $key => $value) {
     $connectstr_dbusername = preg_replace("/^.*User Id=(.+?);.*$/", "\\1", $value);
     $connectstr_dbpassword = preg_replace("/^.*Password=(.+?)$/", "\\1", $value);
 }
-/*
-echo "dbhost: " . $connectstr_dbhost . "<br>";
-echo "dbname: " . $connectstr_dbname . "<br>";
-echo "dbusername: " . $connectstr_dbusername . "<br>";
-echo "dbpassword: " . $connectstr_dbpassword . "<br>"; //get server information
-*/
+
 $link = mysqli_connect($connectstr_dbhost, $connectstr_dbusername, $connectstr_dbpassword, $connectstr_dbname);
 
 if (!$link) {
@@ -29,8 +24,6 @@ if (!$link) {
     exit;
 }
 
-//echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
-//echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
 $servername = $connectstr_dbhost; //get server info from session data
 $username = $connectstr_dbusername;
 $password = $connectstr_dbpassword;

@@ -25,6 +25,7 @@ $logdesc = filter_var($logdesc, FILTER_SANITIZE_STRING);
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
+
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -32,6 +33,7 @@ if ($conn->connect_error) {
 
 $sql = "INSERT INTO aika (Aika_id, paiva, kellonaika, kuvaus)
 VALUES ('0', '$logdate', '$logtime', '$logdesc' )";
+
 //insert some data
 if ($conn->query($sql) === true) {
     //echo "New record created successfully<br><a href='main.php' class='btn btn-primary btn-sm'>Ok</a>";

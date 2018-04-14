@@ -29,12 +29,12 @@ function addButton($x) { //ugly fix but I'm too tired to figure other solution t
   echo '<div id="'.$myVal.'" style= "display:none">';
 } 
 
-if ($_SESSION["tunnus"] == "" || $_SESSION["salasana"] == "") {
+if ($_SESSION["tunnus"] == "" || $_SESSION["salasana"] == "") { //no session info, redirect to index.php
     header('Location: /index.php');
 }
 ?>
 
-<div class="sidenav">
+<div class="sidenav"> <!-- side navigation-->
   <a href="#Sivu1">Your Calendar</a>
   <a href="#Sivu2">About</a>
 
@@ -50,17 +50,9 @@ if ($_SESSION["tunnus"] == "" || $_SESSION["salasana"] == "") {
 	<?php
 
 
-include 'fetch.php';
+include 'fetch.php';  //fetch displayed data with this
 
-sort($tilaisuudet);
-/*
-if (isset($_POST['delete'])) {
-
-    echo "Deleting: " . $_POST['delete'];
-    unset($tilaisuudet[$_POST['delete']]);
-    sort($tilaisuudet);
-}
-*/
+sort($tilaisuudet); //sort displayed data
 
 $arrlength = count($tilaisuudet);
 

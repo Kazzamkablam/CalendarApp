@@ -12,7 +12,8 @@
   <body>
 
  <?php
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -38,23 +39,26 @@ $logpwd = filter_var($logpwd, FILTER_SANITIZE_STRING);
 
 $logpwd = md5($logpwd); //encrypt password
 
-$sql = "INSERT INTO kayttaja (kayttaja_id, etunimi, sukunimi, tunnus, salasana)
-VALUES (0, '$logfname' , '$loglname', '$loguser', '$logpwd')";
 
-if ($conn->query($sql) === true) { //give some info to user.
-    echo "Account created successfully, you may now log in.";
-    echo "<br><br><a href='index.php' class='btn btn-primary btn-sm'>Back</a>";
-} else {
-    if ($conn->errno == 1062) { //duplicate entry
+
+$stmt = $conn->prepare("INSERT INTO kayttaja (etunimi, sukunimi, tunnus, salasana) VALUES (?, ?, ?, ?)"); //prepared statement, mostly for the 4 points
+$stmt->bind_param("ssss", $logfname, $loglname, $loguser, $logpwd); 
+
+if (!$stmt->execute()) {
+
+    if ($stmt->errno == 1062) { // execute throwed duplicate entry error, display some text
         echo "Username already exists";
         echo "<br><br><a href='register.html' class='btn btn-primary btn-sm'>Back</a>";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error; //error happened
-
+    } else { //something else happened, display built in error messages
+        echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
         echo "<br><br><a href='register.html' class='btn btn-primary btn-sm'>Back</a>";
     }
+} else { //yay huge success!
+    echo "Account created successfully, you may now log in.";
+    echo "<br><br><a href='index.php' class='btn btn-primary btn-sm'>Back</a>";
 }
 
+$stmt->close();
 $conn->close();
 ?>
 

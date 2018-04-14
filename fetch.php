@@ -7,8 +7,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-//$sql = "SELECT id, firstname, lastname FROM MyGuests";
-
+//sql script for getting data for the program
 $sql = "
 SELECT aika.Aika_ID, aikataulu.Kayttaja_ID, aika.paiva, aika.kellonaika, aika.kuvaus
 FROM aika
@@ -36,7 +35,7 @@ if ($result->num_rows > 0) {
     }
 
 } else {
-    echo "0 results";
+    echo "0 results"; //no results found, tell it to user.
 }
 $conn->close();
 ?>
