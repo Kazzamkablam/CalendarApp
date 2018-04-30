@@ -1,6 +1,6 @@
 ## noteMeUp
 
-This repository contains the project files of this website. To run this website on a new environment (ie WAMP) you will need to:
+This repository contains the project files of this website. 
 
 ## About program
 
